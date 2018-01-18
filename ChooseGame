@@ -1,0 +1,41 @@
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ChooseGame {}
+
+class ChooseFirst implements ActionListener{
+	
+	BeginGame bg;
+	public ChooseFirst(BeginGame b){
+		bg=b;
+	}
+	public void actionPerformed(ActionEvent e) {
+		bg.dispose();
+		new HuaRongRoad(1, "横刀立马");
+	}
+}
+
+class ChooseSecond implements ActionListener{
+	
+	BeginGame bg;
+	public ChooseSecond(BeginGame b){
+		bg=b;
+	}
+	public void actionPerformed(ActionEvent e) {
+		bg.dispose();
+		new HuaRongRoad(2, "插翅难飞");
+	}
+}
+
+class ChooseThird implements ActionListener{
+	
+	BeginGame bg;
+	public ChooseThird(BeginGame b){
+		bg=b;
+	}
+	public void actionPerformed(ActionEvent e) {
+		bg.dispose();
+		new HuaRongRoad(3, "屯兵东路");
+	}
+}
