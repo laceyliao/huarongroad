@@ -1,0 +1,55 @@
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class BeginGame extends Frame implements ActionListener{
+
+	Person person[] = new Person[10];
+	Button game1 = new Button("横刀立马");
+	Button game2 = new Button("插翅难飞");
+	Button game3 = new Button("屯兵东路");
+	Font font = new Font("微软雅黑", Font.BOLD, 14);
+	ChooseFirst one = new ChooseFirst(this);
+	ChooseSecond two = new ChooseSecond(this);
+	ChooseThird three = new ChooseThird(this);
+	public BeginGame(){
+		setLayout(null);
+		add(game1);
+		game1.setBounds(100,60,120,25);
+		game1.setFont(font);
+		game1.setBackground(Color.CYAN);
+		game1.addActionListener(one);
+
+		add(game2);
+		game2.setBounds(100, 160, 120, 25);
+		game2.setFont(font);
+		game2.setBackground(Color.CYAN);
+		game2.addActionListener(two);
+		
+		add(game3);
+		game3.setBounds(100, 260, 120, 25);
+		game3.setFont(font);
+		game3.setBackground(Color.CYAN);
+		game3.addActionListener(three);
+		
+		setTitle("请选择游戏");
+		setBounds(100,100,320,340);
+		setVisible(true);
+		setResizable(false);
+		validate();
+		addWindowListener( new WindowAdapter(){
+			     public void windowClosing(WindowEvent e)
+			     {
+			         System.exit(0);
+			     }
+			}
+		);
+	}
+	 
+	 public void actionPerformed(ActionEvent e){ }
+}
