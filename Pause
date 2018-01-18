@@ -1,0 +1,33 @@
+
+import java.awt.Button;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Pause implements ActionListener{  
+	
+	private Timer timer;
+    private Button start;
+    private HuaRongRoad h;
+    
+    public Pause (Timer timer, Button start, HuaRongRoad h) {
+    	this.timer = timer;
+    	this.start = start;
+    	this.h = h;
+    }
+    
+	public void actionPerformed(ActionEvent e) {  
+        if (timer.getStopped()) {  
+            timer.addPauseCount (System.currentTimeMillis() - timer.getPauseStart());  
+            timer.setStopped (false); 
+            if(! timer.isDie() )
+            	h.canMove = true;
+            start.setLabel("暂停");  
+        } 
+        else {  
+            timer.setPauseStart (System.currentTimeMillis());  
+            timer.setStopped (true); 
+            h.canMove = false;
+            start.setLabel("继续");  
+        }  
+    }  
+};  
