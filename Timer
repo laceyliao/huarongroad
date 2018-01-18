@@ -1,0 +1,85 @@
+
+import java.awt.Color;
+import java.awt.Label;
+import javax.swing.JOptionPane;
+
+public class Timer extends Thread{
+    
+	public Timer (Label label, HuaRongRoad h, long t) {
+		this.label= label;
+		this.h = h;
+		stopped = false;
+		total = t; 
+		dead = false;
+		elapsed = programStart = pauseCount = pauseStart = 0;
+	}
+	private Label label;
+	private HuaRongRoad h;
+	private boolean stopped,dead;
+	
+	private long elapsed, programStart, pauseCount, total, pauseStart;
+	public void run() {  
+		programStart = System.currentTimeMillis();
+        while (true) {  
+            if (!stopped)
+            {  
+                elapsed = total - (System.currentTimeMillis() - programStart - pauseCount);  
+                if (elapsed < 30000)
+                    label.setForeground(Color.red);
+                
+                label.setText(format(elapsed));  
+                
+                if (elapsed <= 0 ) 
+                {
+                	JOptionPane.showMessageDialog(new JOptionPane(), "时间不等人！", "",0);
+                	//System.out.println ("xxxxxx");
+                	h.canMove = false;
+                	dead = true;
+                	//System.exit(0);
+                	break;
+                	//Thread.interrupted();
+                }
+                	
+            }  
+
+            try {  
+                sleep(1000);  // 1秒更新一次显示
+            } catch (InterruptedException e) {  
+                e.printStackTrace();  
+                System.exit(1);  
+            }  
+        }  
+    }
+	private String format (long elapsed) {
+	
+		int minute, second;  
+		   
+        elapsed = elapsed / 1000;  
+
+        second = (int) (elapsed % 60);  
+        elapsed = elapsed / 60;  
+
+        minute = (int) (elapsed % 60);  
+        elapsed = elapsed / 60;  
+
+        return String.format("%02d:%02d", minute, second);
+   }
+	public boolean getStopped (){		//获取游戏运行状态
+		return stopped;
+	}
+	public void setStopped (boolean c) {//设置停止状态
+		stopped = c;
+	}
+	public void setPauseStart (long t) {//设置暂停后开始的时间
+		pauseStart = t;
+	}
+	public long getPauseStart () {		//获取开始或暂停时的时间
+		return pauseStart;
+	}
+	public void addPauseCount (long t) {//设置（重新）开始计时的时间
+		pauseCount += t;
+	}
+	public boolean isDie(){				//游戏是否停止
+		return dead;
+	}
+}
