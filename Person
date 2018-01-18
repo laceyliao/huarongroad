@@ -1,0 +1,30 @@
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+public class Person extends Button implements FocusListener
+{
+	 int number;
+	 Color c; 
+	 Font font = new Font("微软雅黑", Font.BOLD, 14);
+	 Person(int number,String s)
+	 {
+		  super(s);
+		  setBackground(Color.YELLOW);
+		  setFont(font);
+		  this.number = number;
+		  c = getBackground();
+		  addFocusListener(this);
+	 }
+    public void focusGained(FocusEvent e)//  组件获得键盘焦点时调用
+    {
+    	setBackground(Color.GREEN);
+    }
+    public void focusLost(FocusEvent e)// 组件失去键盘焦点时调用
+    {
+    	setBackground(c);
+    }
+}
