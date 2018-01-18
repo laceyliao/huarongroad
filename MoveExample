@@ -1,0 +1,8 @@
+
+public class MoveExample
+{
+	 public static void main(String args[])
+	 {
+		 new BeginGame();
+	 }
+}
